@@ -58,3 +58,8 @@
   border:5px solid grey;
   display: block;
 }
+
+.email_content table:nth-of-type(3){
+  background: greenyellow;
+  color: red;
+}
