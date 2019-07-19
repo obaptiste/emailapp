@@ -26,32 +26,34 @@ class App extends Component {
   }
 
   updateRef() {
-    this.prvRef.current =  this.prvRef= this.state.preview;
+    this.prvRef.current = this.state.preview;
+    return;
   }
 
-openEmail(e) {
-  
+openEmail(e) { 
   let id = e;
   id = parseInt(id);
  
   let selectedEmail = inbox.filter(x => x.id == id);
   selectedEmail.map((x) => {
-    let email_prev = x.body.html;
-    email_prev = document.getElementsByTagName("Table").item(1);
-    // console.log(email_prev)
-    
     this.setState({
       selectedEmail: x.body.html,
-      preview: email_prev
     });
-   
-  }
-
-  );
-
-  
+  });  
 }
 
+openPreview(e) { 
+  let id = e;
+  id = parseInt(id);
+ 
+  let selectedPreview = inbox.filter(x => x.id == id);
+  selectedPreview.map((x) => {
+    this.prvRef.current =  x.body.text.substring(150, 250);
+    this.setState({
+      selectedPreview: x.body.text.substring(150, 250)
+    });
+  });  
+}
 
 render() {
   return (
@@ -77,7 +79,10 @@ render() {
                 return (
                   <tr>
                     <td>
-                      <button onClick={toggleCollapse}>View Preview</button>
+                      <button onClick={(e) => {
+                          toggleCollapse();
+                          this.openPreview(email.id)
+                        }}>View Preview</button>
                     </td>
                   </tr>
                 );
@@ -88,9 +93,8 @@ render() {
                       <button onClick={toggleCollapse}>Hide Preview</button>
                     </td>
                     <td>
-                      yo
-                      {/* <object ref={this.prvRef.current}></object> */}
-                      
+                        {/* <span className="preview">{this.state.selectedPreview}</span>      */}
+                        <span>{this.prvRef.current}</span>                 
                     </td>
                   </tr>
                 );
