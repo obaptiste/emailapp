@@ -6,11 +6,12 @@
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
   pointer-events: none;
+ 
 }
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: 40vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,4 +31,30 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.inbox {
+  display:flex;
+  flex-flow: column;
+  box-sizing: border-box;
+  padding: 20px;
+  background-color: rgb(199, 218, 218)
+}
+
+.email {
+  
+  display: flex;
+  justify-content: space-evenly;
+  width: 80%;
+  margin-bottom: 20px;
+}
+
+.email span {
+  width: 20%;
+}
+
+.email_content {
+
+  border:5px solid grey;
+  display: block;
 }
