@@ -17,12 +17,30 @@ class App extends Component {
   constructor(props){
     super(props);
     this.prvRef = React.createRef();
+    this.handleOpenClick = this.handleOpenClick.bind(this);
+    this.handleCloseClick = this.handleCloseClick.bind(this);
+
     
   }
   
   state = {
     inbox:inbox,
-    selectedEmail: null
+    selectedEmail: null,
+    previewOpen: false
+  }
+
+  handleOpenClick(e) {
+    this.setState(state => ({
+      previewOpen: !state.previewOpen
+    }));
+
+    this.openPreview(e)
+  }
+
+  handleCloseClick(e) {
+    this.setState(state => ({
+      previewOpen: !state.previewOpen
+    }));
   }
 
   updateRef() {
@@ -79,9 +97,12 @@ render() {
                 return (
                   <tr>
                     <td>
-                      <button onClick={(e) => {
+                      {this.state.previewOpen}
+                      <button 
+                        disabled = {this.state.previewOpen? true : false}
+                        onClick={(e) => {
                           toggleCollapse();
-                          this.openPreview(email.id)
+                          this.handleOpenClick(email.id)
                         }}>View Preview</button>
                     </td>
                   </tr>
@@ -90,11 +111,14 @@ render() {
                 return (
                   <tr>
                     <td>
-                      <button onClick={toggleCollapse}>Hide Preview</button>
+                      <button onClick={(e) => {
+                        toggleCollapse();
+                        this.handleCloseClick()}
+                        }>Hide Preview</button>
                     </td>
                     <td>
                         {/* <span className="preview">{this.state.selectedPreview}</span>      */}
-                        <span>{this.prvRef.current}</span>                 
+                        <span className="preview">{this.prvRef.current}</span>                 
                     </td>
                   </tr>
                 );

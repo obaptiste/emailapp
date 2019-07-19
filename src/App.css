@@ -64,6 +64,13 @@
   color: red;
 }
 
-.preview {
+span.preview {
+  height: 1px;
+  width: 1px;
+  display: flex;
+  position: relative;
+  left: 25px;
+  bottom: 30px;
   font-size: 10px;
 }
+
